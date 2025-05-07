@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at May 5, 2025, 2:03:00 PM                     ---
+ * --- Generated at May 6, 2025, 9:55:30 AM                     ---
  * ----------------------------------------------------------------
  */
 package org.nagacc.core.constants;
@@ -20,11 +20,16 @@ public class GeneratedNagAccCoreConstants
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
+		public static final String SELLER = "Seller".intern();
+		public static final String SELLERCAROUSELCOMPONENT = "SellerCarouselComponent".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 	}
 	public static class Attributes
 	{
-		// no constants defined.
+		public static class Product
+		{
+			public static final String SELLERS = "sellers".intern();
+		}
 	}
 	public static class Enumerations
 	{
@@ -43,6 +48,10 @@ public class GeneratedNagAccCoreConstants
 			public static final String WHITE = "WHITE".intern();
 			public static final String YELLOW = "YELLOW".intern();
 		}
+	}
+	public static class Relations
+	{
+		public static final String PRODUCTTOSELLER = "ProductToSeller".intern();
 	}
 	
 	protected GeneratedNagAccCoreConstants()

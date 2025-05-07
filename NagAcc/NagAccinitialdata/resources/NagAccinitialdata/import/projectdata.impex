@@ -1,0 +1,19 @@
+UPDATE ContentCatalog;id[unique=true];name[lang=en]
+                     ;electronicsContentCatalog;Nagarro Content Catalog
+
+UPDATE Catalog;id[unique=true];name[lang=en]
+              ;electronicsProductCatalog;Nagarro Product Catalog
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];name[lang=en];catalogs(id);defaultCurrency(isocode);defaultLanguage(isocode);solrFacetSearchConfiguration(name);
+                       ;nagarroStore;Nagarro Store;electronicsProductCatalog;USD;en;electronicsIndex;
+
+# Base Site
+REMOVE BaseSite;uid[unique=true];name[lang=en];stores(uid);contentCatalogs(id);defaultLanguage(isocode);defaultCatalog(id);
+                      ;nagarro;Nagarro Site;nagarroStore;electronicsContentCatalog;en;nagarroContentCatalog
+
+INSERT_UPDATE BaseSite;uid[unique=true];urlEncodingAttributes
+                      ;nagarro;language,currency
+
+INSERT_UPDATE CMSSite;uid[unique=true];name[lang=en];stores(uid);redirectURL;channel(code);defaultLanguage(isocode);defaultCatalog(id);contentCatalogs(id)[mode=append]
+                     ;nagarro;Nagarro Site;nagarroStore;;B2C;en;electronicsProductCatalog;electronicsContentCatalog

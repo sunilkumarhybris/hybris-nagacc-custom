@@ -26,11 +26,53 @@
             <value code="YELLOW"/>
         </enumtype>
     </enumtypes>
+    <relations>
+        <relation code="ProductToSeller" localized="false" generate="true"
+                  autocreate="true">
+            <deployment table="ProductToSeller" typecode="29000"/>
+            <sourceElement qualifier="products" type="Product"
+                           cardinality="many" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="sellers" type="Seller" cardinality="many" ordered="true">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+    </relations>
 
     <itemtypes>
 
         <!-- Add your item definitions here -->
+        <itemtype code="Seller" extends="GenericItem"
+                  autocreate="true" generate="true">
+            <deployment table="Seller" typecode="28000"/>
+            <attributes>
+                <attribute qualifier="sellerName" type="localized:java.lang.String">
+                    <description>Name of the seller.</description>
+                    <modifiers read="true" write="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="leadTime" type="java.lang.Integer">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true"/>
+                </attribute>
+                <attribute qualifier="sellerBanner" type="Media">
+                    <description>Optional image for seller</description>
+                    <modifiers optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
 
+        </itemtype>
+
+        <itemtype code="SellerCarouselComponent" generate="true" extends="SimpleCMSComponent" autocreate="true"
+                  jaloclass="org.nagacc.components.SellerCarouselComponent">
+            <attributes>
+                <attribute type="java.lang.Integer" qualifier="timeout">
+                    <persistence type="property" />
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
 

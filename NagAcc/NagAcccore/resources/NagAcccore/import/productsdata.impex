@@ -1,0 +1,70 @@
+$productCatalog = electronicsProductCatalog
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$approved = approvalstatus(code)[default = 'approved']
+$prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$taxGroup = Europe1PriceFactory_PTG(code)[default = jp-taxes]
+$thumbnail = thumbnail(code, $catalogVersion)
+$picture = picture(code, $catalogVersion)
+$thumbnails = thumbnails(code, $catalogVersion)
+$detail = detail(code, $catalogVersion)
+$normal = normal(code, $catalogVersion)
+$others = others(code, $catalogVersion)
+$data_sheet = data_sheet(code, $catalogVersion)
+$medias = medias(code, $catalogVersion)
+$galleryImages = galleryImages(qualifier, $catalogVersion)
+$siteResource = jar:org.assignment.core.constants.NagAccCoreConstants&/NagAcccore/import
+
+INSERT_UPDATE Product;code[unique=true];name[lang=en];catalogVersion(catalog(id),version);description[lang=en];picture(code)
+                     ;nagarro-cam1;Nagarro DSLR Camera A100;electronicsProductCatalog:Staged;24MP DSLR camera with 4K recording;nagarro-cam1-img
+                     ;nagarro-cam2;Nagarro Mirrorless Cam X5;electronicsProductCatalog:Staged;Compact mirrorless camera with fast autofocus;nagarro-cam2-img
+                     ;nagarro-camtripod1;Nagarro Tripod Pro 200;electronicsProductCatalog:Staged;Lightweight aluminum tripod for cameras;nagarro-camtripod1-img
+                     ;nagarro-mic1;Nagarro External Mic V1;electronicsProductCatalog:Staged;Shotgun microphone with wind protection;nagarro-mic1-img
+
+INSERT_UPDATE StockLevel;productCode[unique=true];warehouse(code)[unique=true,default=default];available;inStockStatus(code);maxPreOrder[default=1];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+                        ;nagarro-cam1;warehouse_s;333;forceInStock;;;;;
+                        ;nagarro-cam2;warehouse_s;333;forceInStock;;;;;
+                        ;nagarro-camtripod1;warehouse_s;333;forceInStock;;;;;
+                        ;nagarro-mic1;warehouse_s;333;forceInStock;;;;;
+
+
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
+                      ;nagarro-cam1;pieces;USD;649.00;1;1;false
+                      ;nagarro-cam2;pieces;USD;799.00;1;1;false
+                      ;nagarro-camtripod1;pieces;USD;49.99;1;1;false
+                      ;nagarro-mic1;pieces;USD;59.99;1;1;false
+
+
+# Update Media
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]        ; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]; mime[default = 'image/jpeg']; $catalogVersion; folder(qualifier)
+                   ; 515Wx515H             ; /515Wx515H/nagProduct1.jpg ; $siteResource/images/515Wx515H/nagProduct1.jpg                              ;                             ;                ; images
+                   ; 300Wx300H             ; /300Wx300H/nagProduct1.jpg ; $siteResource/images/300Wx300H/nagProduct1.jpg                              ;                             ;                ; images
+                   ; 96Wx96H               ; /96Wx96H/nagProduct1.jpg   ; $siteResource/images/96Wx96H/nagProduct1.jpg                                ;                             ;                ; images
+                   ; 65Wx65H               ; /65Wx65H/nagProduct1.jpg   ; $siteResource/images/65Wx65H/nagProduct1.jpg                                ;                             ;                ; images
+                   ; 30Wx30H               ; /30Wx30H/nagProduct1.jpg   ; $siteResource/images/30Wx30H/nagProduct1.jpg                                ;                             ;                ; images
+                   ; 515Wx515H             ; /515Wx515H/nagProduct2.jpg ; $siteResource/images/515Wx515H/nagProduct2.jpg                              ;                             ;                ; images
+                   ; 300Wx300H             ; /300Wx300H/nagProduct2.jpg ; $siteResource/images/300Wx300H/nagProduct2.jpg                              ;                             ;                ; images
+                   ; 96Wx96H               ; /96Wx96H/nagProduct2.jpg   ; $siteResource/images/96Wx96H/nagProduct2.jpg                                ;                             ;                ; images
+                   ; 65Wx65H               ; /65Wx65H/nagProduct2.jpg   ; $siteResource/images/65Wx65H/nagProduct2.jpg                                ;                             ;                ; images
+                   ; 30Wx30H               ; /30Wx30H/nagProduct2.jpg   ; $siteResource/images/30Wx30H/nagProduct2.jpg                                ;                             ;                ; images
+                   ; 515Wx515H             ; /515Wx515H/nagProduct3.jpg ; $siteResource/images/515Wx515H/nagProduct3.jpg                              ;                             ;                ; images
+                   ; 300Wx300H             ; /300Wx300H/nagProduct3.jpg ; $siteResource/images/300Wx300H/nagProduct3.jpg                              ;                             ;                ; images
+                   ; 96Wx96H               ; /96Wx96H/nagProduct3.jpg   ; $siteResource/images/96Wx96H/nagProduct3.jpg                                ;                             ;                ; images
+                   ; 65Wx65H               ; /65Wx65H/nagProduct3.jpg   ; $siteResource/images/65Wx65H/nagProduct3.jpg                                ;                             ;                ; images
+                   ; 30Wx30H               ; /30Wx30H/nagProduct3.jpg   ; $siteResource/images/30Wx30H/nagProduct3.jpg                                ;                             ;                ; images
+                   ; 515Wx515H             ; /515Wx515H/nagProduct4.jpg ; $siteResource/images/515Wx515H/nagProduct4.jpg                              ;                             ;                ; images
+                   ; 300Wx300H             ; /300Wx300H/nagProduct4.jpg ; $siteResource/images/300Wx300H/nagProduct4.jpg                              ;                             ;                ; images
+                   ; 96Wx96H               ; /96Wx96H/nagProduct4.jpg   ; $siteResource/images/96Wx96H/nagProduct4.jpg                                ;                             ;                ; images
+                   ; 65Wx65H               ; /65Wx65H/nagProduct4.jpg   ; $siteResource/images/65Wx65H/nagProduct4.jpg                                ;                             ;                ; images
+                   ; 30Wx30H               ; /30Wx30H/nagProduct4.jpg   ; $siteResource/images/30Wx30H/nagProduct4.jpg                                ;                             ;                ; images
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias                                                                                                                          ; $catalogVersion
+                            ; nagProduct1-media       ; /515Wx515H/nagProduct1.jpg,/300Wx300H/nagProduct1.jpg,/96Wx96H/nagProduct1.jpg,/65Wx65H/nagProduct1.jpg,/30Wx30H/nagProduct1.jpg ;
+                            ; nagProduct2-media       ; /515Wx515H/nagProduct2.jpg,/300Wx300H/nagProduct2.jpg,/96Wx96H/nagProduct2.jpg,/65Wx65H/nagProduct2.jpg,/30Wx30H/nagProduct2.jpg ;
+                            ; nagProduct3-media       ; /515Wx515H/nagProduct3.jpg,/300Wx300H/nagProduct3.jpg,/96Wx96H/nagProduct3.jpg,/65Wx65H/nagProduct3.jpg,/30Wx30H/nagProduct3.jpg ;
+                            ; nagProduct4-media       ; /515Wx515H/nagProduct4.jpg,/300Wx300H/nagProduct4.jpg,/96Wx96H/nagProduct4.jpg,/65Wx65H/nagProduct4.jpg,/30Wx30H/nagProduct4.jpg ;
+
+UPDATE Product; code[unique = true]; $picture                   ; $thumbnail               ; $detail; $others                                                                      ; $normal                    ; $thumbnails              ; $galleryImages    ; $catalogVersion
+              ; nagProduct1        ; /300Wx300H/nagProduct1.jpg ; /96Wx96H/nagProduct1.jpg ;        ; /515Wx515H/nagProduct1.jpg,/65Wx65H/nagProduct1.jpg,/30Wx30H/nagProduct1.jpg ; /300Wx300H/nagProduct1.jpg ; /96Wx96H/nagProduct1.jpg ; nagProduct1-media ;
+              ; nagProduct2        ; /300Wx300H/nagProduct2.jpg ; /96Wx96H/nagProduct2.jpg ;        ; /515Wx515H/nagProduct2.jpg,/65Wx65H/nagProduct2.jpg,/30Wx30H/nagProduct2.jpg ; /300Wx300H/nagProduct2.jpg ; /96Wx96H/nagProduct2.jpg ; nagProduct2-media ;
+              ; nagProduct3        ; /300Wx300H/nagProduct3.jpg ; /96Wx96H/nagProduct3.jpg ;        ; /515Wx515H/nagProduct3.jpg,/65Wx65H/nagProduct3.jpg,/30Wx30H/nagProduct3.jpg ; /300Wx300H/nagProduct3.jpg ; /96Wx96H/nagProduct3.jpg ; nagProduct3-media ;
+              ; nagProduct4        ; /300Wx300H/nagProduct4.jpg ; /96Wx96H/nagProduct4.jpg ;        ; /515Wx515H/nagProduct4.jpg,/65Wx65H/nagProduct4.jpg,/30Wx30H/nagProduct4.jpg ; /300Wx300H/nagProduct4.jpg ; /96Wx96H/nagProduct4.jpg ; nagProduct4-media ;
